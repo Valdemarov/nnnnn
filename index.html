@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Мячик</title>
+	<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <img class="image0" id="image1"  src='https://pngimg.com/uploads/football/small/football_PNG1085.png'  style='display:none;'/>
+<canvas id="myCanvas" width="3830" height="1917"></canvas>
+<script>
+var img=document.getElementsByClassName('image0')[0];
+    var canvas = document.getElementById("myCanvas");
+
+var ctx = canvas.getContext("2d");
+var ballRadius =0;
+var x = canvas.width / 2;
+var y = canvas.height/2;
+var dx = 4;
+var dy = -4;
+
+function drawBall() {
+  ctx.beginPath();
+  ctx.drawImage(img,x,y)
+ //  ctx.arc(x, y, ballRadius, 60, Math.PI * 2);
+   
+  // ctx.fillStyle = "#0095DD";
+  //ctx.fill();
+  ctx.closePath();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBall();
+
+  if (x + dx > 3670 - ballRadius || x + dx < ballRadius) {
+    dx = -dx;
+  }
+  if (y + dy > 1757- ballRadius || y + dy < ballRadius) {
+    dy = -dy;
+  }
+
+  x += dx;
+  y += dy;
+}
+
+setInterval(draw, 3)
+//clearInterval (draw, 30 )
+let timerId = setTimeout(function tick() {
+  alert('Стоп');
+  timerId = setTimeout(tick, 1000000000); // (*)
+}, 1000000000);
+
+</script>
+</body>
+</html>
